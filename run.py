@@ -18,7 +18,10 @@ app = Flask(__name__)
     key, which is a random list of letters, numbers, and characters. 
     In production we'd have it as an environment variable, but for now we'll put
     it as a string. """
-app.secret_key = "randomstring123"
+    
+    # Make the secret key an environment variable. "randomstring123" becomes the
+    # default value, if flask cant find a variable called SECRET.
+app.secret_key = os.getenv('SECRET', "randomstring123")
 
 # Create an empty list for messages
 messages = []
@@ -94,6 +97,6 @@ def user(username):
     
 
 
-app.run(host=os.getenv('IP'), port=int(os.getenv('PORT')), debug=True)
+app.run(host=os.getenv('IP', "0.0.0.0"), port=int(os.getenv('PORT', "5000")), debug=True)
 
 
