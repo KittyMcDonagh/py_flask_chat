@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat page for {{ username }}</title>
+</head>
+
+<body>
+    <h1>Welcome, {{ username }}</h1>
+
+    <form method="POST">
+        <textarea cols="50" rows="4" name="message" id="message"></textarea>
+        <br>
+        <button>Send message</button>
+
+    </form>
+
+
+    {% for message in chat_messages %}
+    <p>({{ message.timestamp }}) {{ message.from }}: {{ message.message }}</p>
+    {% endfor %}
+
+    <script>
+        // Set a timer to refresh the page every 5 seconds, so that the page has
+        // all the latest messages. setTimeout() is a builtin js function that runs a
+        // function at a given interval. In this case its going to run 
+        // the function location.reload() at an interval of every 5 seconds
+        
+        let textbox = document.getElementById("message")
+        
+        let timer = setTimeout(function() {
+            location.reload();
+        }, 5000);
+        
+        // We need to check if someone is typing into the textarea, if so
+        // reset the time to allow them to complete the message
+        // onkeydown() runs whenever a key is pressed
+        
+        textbox.onkeydown = function(e) {
+            clearTimeout(timer);
+            
+             timer = setTimeout(function() {
+            location.reload();
+        }, 5000);
+        
+            
+            
+        };
+    </script>
+
+</body>
+
+</html>
