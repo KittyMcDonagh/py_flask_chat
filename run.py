@@ -95,8 +95,8 @@ def user(username):
     
    #  return "<h1>Welcome, {}</h1>{}".format(username, messages)
     
+# Set the default values for IP and PORT before deployment. Set debug=false.
 
-
-app.run(host=os.getenv('IP', "0.0.0.0"), port=int(os.getenv('PORT', "5000")), debug=True)
+app.run(host=os.getenv('IP', "0.0.0.0"), port=int(os.getenv('PORT', "5000")), debug=False)
 
 
